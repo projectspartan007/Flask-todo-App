@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>ToDo App</title>
+        <style type="text/css">
+            
+            .page{
+                padding: 5px;
+                padding-left: 5px;
+                width: 45%;
+                margin: 0 auto;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                border-radius: 5px;
+            }
+
+            h2,h3{
+                margin: 15px auto;
+                text-align: center;
+                background-color: aliceblue;
+                width:90%;
+                border-radius: 2px;
+                padding: 5px;
+            }
+
+            ul,.add-item{
+                margin: 10px auto;
+                width: 50%;
+                
+            }
+        
+        </style>
+
+
+    </head>
+    <body>
+        <div class="page">
+            <h2>My Todo List</h2>
+
+            <div class="add-item">
+                <form action=" {{url_for('add')}} " method="POST">
+                    Add a todo item :
+                    <input type="text" name="todoitem">
+                    <input type="submit" value="Add Item">
+                </form>
+            </div>
+
+            <h3>Incomplete task :</h3>
+            <ul>
+                {% for todo in incomplete %}
+                <li> {{todo[1]}} <a href=" {{url_for('complete',id=todo[0])}} "><img src="{{ img_incomplete }}" alt="Incomplete"></a> </li> 
+                {% endfor %}
+            </ul>
+
+            <h3>Completed task :</h3>
+            <ul>
+                {% for todo in complete %}
+                <li><strike>{{todo[1]}}</strike>&nbsp;<img src="{{ img_complete }}" alt="Mark Complete">&nbsp; <a href=" {{url_for('delete',id=todo[0])}} "> <img src="{{ img_delete }}" alt="Delete"></a></li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </body>
+</html>
